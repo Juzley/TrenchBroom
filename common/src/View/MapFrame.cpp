@@ -1461,10 +1461,8 @@ namespace TrenchBroom {
         void MapFrame::showCompileDialog() {
             if (m_compilationDialog == nullptr) {
                 m_compilationDialog = new CompilationDialog(this);
-                m_compilationDialog->show();
-            } else {
-                m_compilationDialog->raise();
             }
+            showModelessDialog(m_compilationDialog);
         }
 
         void MapFrame::compilationDialogWillClose() {
@@ -1472,7 +1470,6 @@ namespace TrenchBroom {
             const auto& gameName = m_document->game()->gameName();
             auto& gameFactory = Model::GameFactory::instance();
             gameFactory.saveConfigs(gameName);
-            m_compilationDialog = nullptr;
         }
 
         void MapFrame::showLaunchEngineDialog() {
